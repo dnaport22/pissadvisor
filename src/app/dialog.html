@@ -1,0 +1,20 @@
+<h1 mat-dialog-title xmlns="">{{data.name}}</h1>
+<div mat-dialog-content>
+  <rating
+        [max]="data.rating"
+        iconClass="fa-star"
+        fullIcon="★"
+        emptyIcon="★"
+        [readonly]="true"
+        [float]="true">
+      </rating>
+  <mat-list-item>
+    <p matLine>{{ data.distance }} miles</p>
+  </mat-list-item>
+</div>
+<mat-list>
+  <mat-list-item (click)="onButtonClick(1, data)">
+    <h3>Maps</h3>
+    <img matListIcon src="assets/images/directions.png">
+  </mat-list-item>
+</mat-list>

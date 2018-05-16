@@ -1,20 +1,45 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<mat-toolbar color="deep-orange">
+    <span class="title-center">
+      <a style="color: #f4c20d; font-size: 26px">h</a><a style="color: #4885ed; font-size: 26px">o</a><a style="color: #db3236; font-size: 26px">l</a><a style="color: #4885ed; font-size: 26px">d</a><a style="color: #3cba54; font-size: 26px">u</a><a style="color: #db3236; font-size: 26px">p</a>
+    </span>
+</mat-toolbar>
+<mat-list-item>
+</mat-list-item>
+<div id="map" style="display: none;"></div>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#3cba54"
+  loadingText="holdup mate..."
+  type="ball-scale-multiple">
+</ngx-spinner>
+<mat-list>
+  <mat-list-item class="current-address" *ngIf="current_address">
+    <img matListAvatar class="center" src="assets/images/marker.png">
+      <p matLine>
+        <span>{{current_address}}
+        </span>
+      </p>
+  </mat-list-item>
+  <mat-list-item *ngFor="let data of places | orderBy: 'distance';" (click)="openDialog(data)">
+    <img matListAvatar src="{{data.icon}}">
+    <h3 matLine> {{data.name}} </h3>
+    <p matLine>
+      <span class="info"> {{data.rating}} </span>
+      <rating
+        [max]="data.rating"
+        iconClass="fa-star"
+        fullIcon="★"
+        emptyIcon="★"
+        [readonly]="true"
+        [float]="true">
+      </rating>
+    </p>
+      <p matLine class="info">{{data.formatted_address}}</p>
+      <p matLine *ngIf="data.opening_hours || ''">
+        <span class="info" *ngIf="data.opening_hours.open_now">Open</span>
+      </p>
+    <p matLine class="info">{{ data.distance }} miles</p>
+  </mat-list-item>
+</mat-list>
